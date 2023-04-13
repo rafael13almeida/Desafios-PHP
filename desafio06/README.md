@@ -6,4 +6,4 @@
 
 ## Resultado !
 
-![Anatomia  de uma Divisão]("C:\Users\Teknisa\Downloads\desafio06.png")
+![Anatomia  de uma Divisão](/desafio06/img/desafio06.png)
