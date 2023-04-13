@@ -13,14 +13,25 @@
             <label for="dividendo">Dividendo</label>
             <input type="number" name="dividendo" id="dividendo" min="1">
             <label for="divisor">Divisor</label>
-            <input type="number" name="divisor" id="divisor">
+            <input type="number" name="divisor" id="divisor" min="0">
             <input type="submit" value="Analisar">
         </form>
-
+    </main>
         <section>
             <h2>Resultado:</h2>
-            
+            <?php 
+
+                $dividendo = (int) $_POST['dividendo'];
+                $divisor = (int) $_POST['divisor'];
+                $resultado =  $dividendo / $divisor;
+                $resto = $dividendo % $divisor;
+                echo "<ul>
+                        <li>O valor do Dividendo foi: ".$dividendo."</li>
+                        <li>O valor do Divisor foi: ".$divisor."</li><br>
+                        <li>O valor inteiro da divisão foi: <strong>".floor($resultado)."</strong></li>
+                        <li>O resto da divisão foi: <strong>".$resto."</strong></li>
+                    </ul>";
+            ?>
         </section>
-    </main>
 </body>
 </html>
