@@ -11,7 +11,7 @@
     <main>
         <h1>Informe seu Salário</h1>
         <?php 
-            $salario = $_POST['salario'];
+            $salario = $_POST['salario'] ?? 1380;
             $minimo = 1380;
         ?>
         <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
@@ -26,8 +26,13 @@
         <h2>Resposta</h2>
         <?php 
         $numSalario = (int) ($salario / $minimo);
-        $restoSalario = $salario % $minimo;
-        echo "Quem recebe um salário de R$",number_format($salario, 2, ",", ".")." ganha <strong>".$numSalario." salário(s) mínimo(s)</srtong>  + <strong>R$".number_format($restoSalario, 2, ",", ".")."</strong>.";
+        $restoSalario = $salario - ($numSalario * $minimo);
+
+        if($salario < $minimo) {
+            echo "Salário menor que o mínimo, <strong>faltam R$".number_format($minimo - $salario, 2, ",", ".")."</strong> para completar um salário mínimo";
+        } else {
+            echo "Quem recebe um salário de R$",number_format($salario, 2, ",", ".")." ganha <strong>".$numSalario." salário(s) mínimo(s)</srtong>  + <strong>R$".number_format($restoSalario, 2, ",", ".")."</strong>.";
+        }
         ?>
     </section>
 </body>
