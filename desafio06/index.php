@@ -8,30 +8,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <?php 
+    
+    $dividendo = $_POST['dividendo'] ?? 0;
+    $divisor = $_POST['divisor'] ?? 1;
+
+    ?>
     <main>
         <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
             <label for="dividendo">Dividendo</label>
-            <input type="number" name="dividendo" id="dividendo" min="1">
+            <input type="number" name="dividendo" id="dividendo" min="0" value="<?=$dividendo?>" require>
             <label for="divisor">Divisor</label>
-            <input type="number" name="divisor" id="divisor" min="0">
+            <input type="number" name="divisor" id="divisor" min="1" value="<?=$divisor?>" require>
             <input type="submit" value="Analisar">
         </form>
     </main>
         <section>
             <h2>Resultado:</h2>
             <?php 
-
-                $dividendo = (int) $_POST['dividendo'];
-                $divisor = (int) $_POST['divisor'];
-                $resultado =  $dividendo / $divisor;
+                $resultado = floor($dividendo / $divisor);
                 $resto = $dividendo % $divisor;
-                echo "<ul>
-                        <li>O valor do Dividendo foi: ".$dividendo."</li>
-                        <li>O valor do Divisor foi: ".$divisor."</li><br>
-                        <li>O valor inteiro da divisão foi: <strong>".floor($resultado)."</strong></li>
-                        <li>O resto da divisão foi: <strong>".$resto."</strong></li>
-                    </ul>";
             ?>
+
+            <table class="divisao">
+                <tr>
+                    <td><?=$dividendo?></td>
+                    <td><?=$divisor?></td>
+                </tr>
+                <tr>
+                    <td><?=$resto?></td>
+                    <td><?=$resultado?></td>
+                </tr>
+            </table>
         </section>
 </body>
 </html>
