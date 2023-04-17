@@ -11,13 +11,13 @@
     <main>
         <h1>Informe seu Salário</h1>
         <?php 
-            $salario = $_POST['salario'] ?? 1380;
-            $minimo = 1380;
+            $salario = $_POST['salario'] ?? 0;
+            $minimo = 1320;
         ?>
         <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
             <label for="salario">Salário (R$)</label>
             <input type="number" name="salario" id="salario" min="0" step="0.01" value="0" require>
-            <p>Considerando o salário mínimo de R$1.380</p>
+            <p>Considerando o salário mínimo de R$1.320</p>
             <input type="submit" value="Calcular">
         </form>
     </main>
@@ -28,7 +28,10 @@
         $numSalario = (int) ($salario / $minimo);
         $restoSalario = $salario - ($numSalario * $minimo);
 
-        if($salario < $minimo) {
+        if($salario === 0) {
+            echo "";
+        }
+        else if($salario < $minimo) {
             echo "Salário menor que o mínimo, <strong>faltam R$".number_format($minimo - $salario, 2, ",", ".")."</strong> para completar um salário mínimo";
         } else {
             echo "Quem recebe um salário de R$",number_format($salario, 2, ",", ".")." ganha <strong>".$numSalario." salário(s) mínimo(s)</srtong>  + <strong>R$".number_format($restoSalario, 2, ",", ".")."</strong>.";
