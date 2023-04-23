@@ -12,15 +12,17 @@
         <h1>Calculando sua Idade</h1>
 
         <?php 
-
-            $anoNascimento = date($_POST['anoNascimento']) ?? 2023;
-            $anoCuriosidade = date($_POST['anoCuriosidade']) ?? 2023;
+            
+            $dataAtual = date("Y");
+            $anoNascimento = $_POST['anoNascimento'] ?? 0;
+            $anoCuriosidade = $_POST['anoCuriosidade'] ?? $dataAtual;
+            
         ?>
         <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
             <label for="ano de nascimento">Digite o ano em que você nasceu:</label>
-            <input type="number" name="anoNascimento" id="anoNascimento">
-            <label for="ano de curiosidade">Quer saber sua idade em que ano?</label>
-            <input type="number" name="anoCuriosidade" id="anoCuriosidade">
+            <input type="number" name="anoNascimento" id="anoNascimento" value="<?=$anoNascimento?>" require>
+            <label for="ano de curiosidade">Quer saber sua idade em que ano? (Atualmente estamos no ano de <strong> <?=$dataAtual?></strong>)</label>
+            <input type="number" name="anoCuriosidade" id="anoCuriosidade" value="<?=$anoCuriosidade?>" require>
             <input type="submit" value="Qual será minha idade?">
         </form>
     </main>
@@ -30,9 +32,13 @@
         <?php 
             
             $idade = abs($anoCuriosidade - $anoNascimento);
-            //Fazer validação para idade inferior a 0
-            var_dump($anoNascimento, $anoCuriosidade, $idade); die;
-            echo "<p>$idade</p>";
+            if($idade == 2023) {
+                echo "<p> Digite o ano em que você nasceu e o ano que você quer saber a idade.</p>";
+            } else if($anoNascimento > $anoCuriosidade) {
+                echo "<p>Em <strong>$anoCuriosidade</strong> você ainda não tinha nascido.</p>";
+            } else {
+                echo "<p>Em $anoCuriosidade você terá <strong>$idade anos</strong>.</p>";
+            }
         ?>
     </section>
 </body>
