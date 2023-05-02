@@ -1,5 +1,7 @@
 # Calculadora de Tempo
 
+> Status: Em Andamento
+
 + Deverá ser criado um formulário com os seguintes campos: 
     + Um campo para o usuário informar o tempo em segundos;
     + Um botão "Calcular" para realizar o cálculo;
