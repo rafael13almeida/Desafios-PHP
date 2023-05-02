@@ -13,29 +13,39 @@
     <main>
         <h1>Calculadora de Tempo</h1>
 
-        <?php 
-            $semana   = 604800;
-            $dia      = 86400;
-            $hora     = 3600;
-            $minutos  = 60;
-            $tempo = 0;
+        <?php
+            $tempo = $_POST['tempo'] ?? 0;
         ?>
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post">
             <label for="segundos">Qual o total de segundos? </label>
-            <input type="number" name="seg" id="seg" min="0">
-            <input type="submit" value="Caalcular">
+            <input type="number" name="tempo" id="tempo" min="0" value="<?= $tempo ?>">
+            <input type="submit" value="Calcular">
         </form>
     </main>
 
     <section>
         <h2>Totalizando Tudo</h2>
-        <p>Analisando o valor que você digitou, <strong><?=$tempo?></strong> equivalem a um total de: </p>
+
+        <p>Analisando o valor que você digitou, <strong><?= $tempo ?></strong> equivalem a um total de: </p>
+
+        <?php
+            $semana = floor($tempo / 604800);
+            $tempo %= 604800;
+            $dia = floor($tempo / 86400);
+            $tempo %= 86400;
+            $hora = floor($tempo / 3600);
+            $tempo %= 3600;
+            $minuto = floor($tempo / 60);
+            $tempo %= 60;
+        ?>
+
         <ul>
-            <li> semanas</li>
-            <li> dias</li>
-            <li> horas</li>
-            <li> minutos</li>
-            <li> segundos</li>
+            <li><?= $semana ?> semanas</li>
+            <li><?= $dia ?> dias</li>
+            <li><?= $hora ?> horas</li>
+            <li><?= $minuto ?> minutos</li>
+            <li><?=$tempo?> segundos</li>
+
         </ul>
     </section>
 </body>
